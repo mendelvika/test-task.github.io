@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <script src="paginator.js"></script> -->
+  </head>
+  <body>
+    <div id="app">
+      <h1>test table</h1>
+      <input type="text" v-model="search" placeholder="Search title.." />
+      <p>* to edit person`s data click on row, edit it and tap enter</p>
+      <div id="table-box">
+        <table>
+          <tbody>
+            <tr v-for="(item,key) in paginatedData" :key="key">
+              <td @click="edit=true" v-show="edit == false" class="id">
+                {{item.id}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="id"
+                  name="id"
+                  v-model="item.id"
+                  v-on:blur="edit=false;"
+                  @keyup.enter="edit=false; editItem(person.id)"
+                />
+              </td>
+              <td @click="edit=true" v-show="edit == false" class="name">
+                {{item.name}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="name"
+                  name="name"
+                  v-model="item.name"
+                  @keyup.enter="edit=false; editItem(person.name)"
+                />
+              </td>
+              <td @click="edit=true" v-show="edit == false" class="email">
+                {{item.email}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="email"
+                  name="email"
+                  v-model="item.email"
+                  @keyup.enter="edit=false; editItem(person.email)"
+                />
+              </td>
+              <td @click="edit=true" v-show="edit == false" class="funds">
+                {{item.funds}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="funds"
+                  name="funds"
+                  v-model="item.funds"
+                  @keyup.enter="edit=false; editItem(person.funds)"
+                />
+              </td>
+              <td @click="edit=true" v-show="edit == false" class="city">
+                {{item.city}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="city"
+                  name="city"
+                  v-model="item.city"
+                  @keyup.enter="edit=false; editItem(person.city)"
+                />
+              </td>
+              <td @click="edit=true" v-show="edit == false" class="phone">
+                {{item.phone}}
+              </td>
+              <td v-show="edit == true">
+                <input
+                  class="phone"
+                  name="id"
+                  v-model="item.phone"
+                  @keyup.enter="edit=false; editItem(person.phone)"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="page-options">
+        <button :disabled="pageNumber ===0" @click="prevPage">prev</button>
+        <button v-for="number in pageCount" @click="page(number-1)">
+          {{number}}
+        </button>
+        <button :disabled="pageNumber>=pageCount-1" @click="nextPage">
+          next
+        </button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
